@@ -17,7 +17,7 @@
 .sidebar{
 	grid-area: s;
 	background-color:#BCC2C9;
-	height: 500px;
+	height: 800px;
 }
 
 .content{
