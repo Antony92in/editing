@@ -1,0 +1,32 @@
+.header{
+	text-align: center;
+}
+
+.main{
+	display: grid;
+	grid-template-areas: "p c";
+	grid-gap: 10px;
+	grid-template-columns: 20% 80%;
+}
+
+.panel{
+	grid-area: p;
+	background-color: #A3D3FD;
+	height: 500px;
+	padding: 10px;
+}
+
+.content{
+	grid-area: c;
+	background-color: #A3D3FD;
+}
+
+.hidden{
+	
+	
+}
+
+.adit{
+	padding: 20px;
+	width: 40%;
+}

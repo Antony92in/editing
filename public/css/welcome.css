@@ -3,8 +3,9 @@
 	margin: 0 auto;
 	width: 80%;
 	grid-gap: 5px;
-	grid-template-areas: "h h h " "s c r";
-	grid-template-columns: 300px 900px;
+	grid-template-areas: "h h h " "s s s" "c c r";
+	
+
 	
 }
 
@@ -12,23 +13,40 @@
 	text-align: center;
 	background-color: #BCC2C9;
 	grid-area: h;
+	border-radius: 5px;
+	font-family: 'Trade Winds' ;
 }
 
 .sidebar{
 	grid-area: s;
-	background-color:#BCC2C9;
-	height: 800px;
+	background-color:#D5D8DB;
+	text-align: center;
+	border-radius: 5px;
+	padding: 20px;
+	
 }
 
 .content{
 	grid-area: c;
-	background-color: #BCC2C9;
-	text-align: center;
+	background-color: #D5D8DB;
+	border-radius: 5px;
+	padding: 20px;
+	opacity: 90%;
+	
+
 	
 }
 
 .right{
 	grid-area: r;
 	text-align: center;
-	background-color: #BCC2C9;
+	background-color: #D5D8DB;
+	border-radius: 5px;
+	padding: 20px;
+	opacity: 90%;
+}
+
+.post{
+	height: 50px;
+	overflow: hidden;
 }

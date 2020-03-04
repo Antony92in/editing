@@ -22,3 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', function(){
 	return view('admin');
 })->middleware('admin');
+
+Route::post('/post', 'PostController@store')->middleware('admin');
+
+Route::get('/news', 'ShowController@index');

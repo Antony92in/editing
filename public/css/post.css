@@ -1,0 +1,23 @@
+.main{
+	display: grid;
+	width: 80%;
+	grid-template-areas: "h" "con" "com";
+	margin: 0 auto;
+	grid-gap: 10px;
+}
+
+.header{
+	grid-area: h;
+	background-color: #A5D2EF;
+	text-align: center;
+}
+
+.content{
+	grid-area: con;
+	background-color: #A5D2EF;
+}
+
+.comments{
+	grid-area: com;
+	background-color: #A5D2EF;
+}
