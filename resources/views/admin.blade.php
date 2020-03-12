@@ -29,17 +29,33 @@
             <br>
             <select id="game">
               <option disabled="" selected="">Выберите игру</option>
-              <option>GTA 5</option>
+              <option>CS 1.6</option>
               <option>PUBG</option>
-              <option>CS</option>
+              <option>CS:GO</option>
+            </select>
+            <select id="cat">
+              <option disabled="" selected="">Выберите раздел</option>
+              <option>Статьи</option>
+              <option>Гайды</option>
+              <option>Настройки</option>
             </select>
             <br>
             <br>
-            <input type="text" name="pic"><p>Добавить ссылку на картинку</p>
-            <button type="button" class="btn btn-secondary btn-sm">Добавить</button>
+            <button>Добавить</button>
+            </div>
+            <hr>
+            <div class="search">
+              <p>Искать пост</p>
+              <form method="GET" action="/findpost">
+                <input type="text" name="title" id="find">
+                <input type="submit" name="" value="Найти" class="btn btn-success">
+              </form>
+              
+              
             </div>
 
-            <div id="info"></div>
+            <div id="info">
+            </div>
           </div>
         </div>
       </div>
@@ -53,7 +69,7 @@
     }
 });
  $('button').on('click', function(){
- if ( $('#title').val() == '' || $('#text').val() == '' ) {
+ if ( $('#title').val() == '' || $('#text').val() == '' || $('#game').val() == null ) {
   alert('Заполните форму!');
  }else{
   $.ajax({
@@ -63,19 +79,28 @@
       name: '{{ Auth::user()->name }}',
       title: $('#title').val(),
       text: $('#text').val(),
-      cat: 'news',
+      cat: $('#cat').val(),
+      game: $('#game').val(),
 
     },
-    success: function(){
-      $('#info').text('done');
+    success: function(msg){
+      $('#info').text('Добавлено');
       $('#title').val('');
       $('#text').val('');
+
+      
+
     }
 
   });
   }
   
  });
+
+ 
+ 
 </script>
 </body>
 </html>
+
+

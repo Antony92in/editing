@@ -10,14 +10,28 @@
 	grid-area: h;
 	background-color: #A5D2EF;
 	text-align: center;
+	border-radius: 5px;
+	font-family: 'Bellota', cursive;
 }
 
 .content{
 	grid-area: con;
-	background-color: #A5D2EF;
+	background-color: #D3DCE3;
+	border-radius: 5px;
+	padding: 20px;
 }
 
 .comments{
 	grid-area: com;
-	background-color: #A5D2EF;
+	background-color: #A0F1C4;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+.form{
+	width: 50%;
+}
+
+.red{
+	display: none;
 }

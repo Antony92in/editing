@@ -10,21 +10,136 @@
 	<title>Post</title>
 </head>
 <body>
+	<br>
 	<div class="main">
 		<div class="header">
-			<h2>{{ $post->title }}</h2>
+			<h1>{{ $post->title }}</h1>
 		</div>
 		<div class="content">
-			<p>{{ $post->text }}</p>
+			<p id="cont">
+				@php
 
+				echo preg_replace('{http(\S+)jpg}', '<br> <img src="$0" height="50%" width="50%"> <br>', $post->text)
+
+				@endphp
+			</p>
+			<hr>
+			@auth
+			@if(Auth::user()->status == 'admin')
+			<button id="redact">Редактировать</button>
+			<div class="redt red">
+				<textarea class="form-control" id="redtitle">{{ $post->title }}</textarea>
+				<textarea class="form-control" id="redtext">{{ $post->text }}</textarea>
+				<button id="sendred">Отправить</button>
+				<button id="delete">Delete</button>
+
+			</div>
+			@endif
+			@endauth
+			<br><br>
+			<a href="/" class="btn btn-primary btn-sm">Вернуться на главную</a>
 		</div>
+		
 		<div class="comments">
-			Comments
+			<h4>Комментарии</h4>
+			
+			@foreach($comments as $comment)
+
+			<h4>{{$comment->author}}</h4>
+
+			{{ $comment->text }}
+			<hr>
+
+			@endforeach
+
+			<hr>
+			
+			<div class="form">
+				<h4>Добавить комментарий</h4>
+				
+				<div class="form-group">
+					<input type="hidden" name="post_id" id="post_id" value="{{ $post->id }}">
+					@guest
+					<label for="exampleInputEmail1">Ваш никнейм</label>
+					<input type="text" class="name">
+					@endguest
+					@auth
+					<input type="hidden" class="name" value="{{ Auth::user()->name }}">
+					@endauth
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Текст</label>
+					<input type="text" class="form-control" id="text" name="comment">
+				</div>
+				<button id="com" class="btn btn-primary">Добавить</button>
+				
+			</div>
+			
+			
+			<div id="info"></div>
 		</div>
 	</div>
 
 
 
+	<script type="text/javascript">
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+		$('#com').on('click', function(){
+			$.ajax({
+				url: '/addcom',
+				method: 'POST',
+				data:{
+					post_id: $('#post_id').val(),
+					name: $('.name').val(),
+					text: $('#text').val()
+				},
+				success: function(msg){
+					$('#info').text(msg);
+					$('#text').val('');
+					$('.name').val('');
 
+				}
+			})
+			
+		});
+
+		$('#redact').on('click', function(){
+			$('.redt').toggleClass('red');
+		})
+
+		$('#sendred').on('click', function(){
+			$.ajax({
+				url:'/redact',
+				method:'POST',
+				data:{
+					id: "{{ $post->id }}",
+					title: $('#redtitle').val(),
+					text: $('#redtext').val(),
+				},
+				success: function(){
+					location.reload();
+				}
+
+			});
+		});
+
+		$('#delete').on('click', function(){
+			if (confirm('Удалить статью?')) {
+				$.ajax({
+					url: '/delete',
+					method: 'POST',
+					data:{
+						id: "{{ $post->id }}",
+					},
+				});
+			}
+		})
+	</script>
 </body>
 </html>
+
+

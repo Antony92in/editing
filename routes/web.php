@@ -25,4 +25,14 @@ Route::get('/admin', function(){
 
 Route::post('/post', 'PostController@store')->middleware('admin');
 
+Route::post('/redact', 'PostController@update')->middleware('admin');
+
+Route::post('/delete', 'PostController@delete')->middleware('admin');
+
 Route::get('/news', 'ShowController@index');
+
+Route::post('/addcom', 'CommentsController@index');
+
+Route::get('/findpost', 'FindController@index');
+
+Route::get('/postfind', 'FindController@cat');

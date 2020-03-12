@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Comment;
 use App\Http\Controllers\Controller;
 
 class ShowController extends Controller
@@ -14,6 +15,12 @@ class ShowController extends Controller
 
     	$posts = $obj->find($req->id);
 
-    	return view('post', [ 'post' => $posts]);
+    	$com = new Comment;
+
+    	$comments = $com->where('post_id', $req->id)->get();
+
+
+
+    	return view('post',['post' => $posts, 'comments' => $comments] );
     }
 }
