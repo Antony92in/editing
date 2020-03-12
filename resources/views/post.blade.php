@@ -19,7 +19,9 @@
 			<p id="cont">
 				@php
 
-				echo preg_replace('{http(\S+)jpg}', '<br> <img src="$0" height="50%" width="50%"> <br>', $post->text)
+				$preg = preg_replace('{http(\S+)jpg}', '<br> <img src="$0" height="50%" width="50%"> <br>', $post->text);
+
+				echo  nl2br($preg);
 
 				@endphp
 			</p>

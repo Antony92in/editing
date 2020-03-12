@@ -92,7 +92,11 @@
       @foreach($posts as $post)
       <div>
        <h4>{{ $post->title }}</h4>
-       <p class="post">{{ $post->text }}</p>
+       <p class="post">
+         @php
+          echo preg_replace('{<iframe(.*)></iframe>}', '<br> Video', $post->text )
+         @endphp
+       </p>
        <a href="{{ action('ShowController@index', ['id' => $post->id ] ) }}" >Читать полностью</a>
        <hr>
      </div>
