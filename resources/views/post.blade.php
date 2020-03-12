@@ -48,6 +48,16 @@
 			<h4>{{$comment->author}}</h4>
 
 			{{ $comment->text }}
+
+			<br>
+			@auth
+			@if(Auth::user()->status == 'admin')
+			<form method="POST" action="{{ action('CommentsController@delete',['id' => $comment->id ]) }}">
+				@csrf
+				<input type="submit" name="" value="Удалить">
+			</form>
+			@endif
+			@endauth
 			<hr>
 
 			@endforeach
@@ -82,62 +92,7 @@
 
 
 
-	<script type="text/javascript">
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-		$('#com').on('click', function(){
-			$.ajax({
-				url: '/addcom',
-				method: 'POST',
-				data:{
-					post_id: $('#post_id').val(),
-					name: $('.name').val(),
-					text: $('#text').val()
-				},
-				success: function(msg){
-					$('#info').text(msg);
-					$('#text').val('');
-					$('.name').val('');
-
-				}
-			})
-			
-		});
-
-		$('#redact').on('click', function(){
-			$('.redt').toggleClass('red');
-		})
-
-		$('#sendred').on('click', function(){
-			$.ajax({
-				url:'/redact',
-				method:'POST',
-				data:{
-					id: "{{ $post->id }}",
-					title: $('#redtitle').val(),
-					text: $('#redtext').val(),
-				},
-				success: function(){
-					location.reload();
-				}
-
-			});
-		});
-
-		$('#delete').on('click', function(){
-			if (confirm('Удалить статью?')) {
-				$.ajax({
-					url: '/delete',
-					method: 'POST',
-					data:{
-						id: "{{ $post->id }}",
-					},
-				});
-			}
-		})
+	<script type="text/javascript" src="js/post.js">
 	</script>
 </body>
 </html>

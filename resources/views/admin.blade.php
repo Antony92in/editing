@@ -51,7 +51,7 @@
                 <input type="submit" name="" value="Найти" class="btn btn-success">
               </form>
               
-              
+              <input type="hidden" name="" id="name" value="{{ Auth::user()->name }}">
             </div>
 
             <div id="info">
@@ -62,43 +62,7 @@
     </div>
 
 
-<script type="text/javascript">
- $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
- $('button').on('click', function(){
- if ( $('#title').val() == '' || $('#text').val() == '' || $('#game').val() == null ) {
-  alert('Заполните форму!');
- }else{
-  $.ajax({
-    url:'/post',
-    method:'POST',
-    data:{
-      name: '{{ Auth::user()->name }}',
-      title: $('#title').val(),
-      text: $('#text').val(),
-      cat: $('#cat').val(),
-      game: $('#game').val(),
-
-    },
-    success: function(msg){
-      $('#info').text('Добавлено');
-      $('#title').val('');
-      $('#text').val('');
-
-      
-
-    }
-
-  });
-  }
-  
- });
-
- 
- 
+<script type="text/javascript" src="js/admin.js">
 </script>
 </body>
 </html>

@@ -29,6 +29,8 @@ Route::post('/redact', 'PostController@update')->middleware('admin');
 
 Route::post('/delete', 'PostController@delete')->middleware('admin');
 
+Route::post('/delcom', 'CommentsController@delete')->middleware('admin');
+
 Route::get('/news', 'ShowController@index');
 
 Route::post('/addcom', 'CommentsController@index');

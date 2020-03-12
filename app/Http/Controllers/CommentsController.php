@@ -27,4 +27,15 @@ class CommentsController extends Controller
     			return 'Добавлено';
     		}
     }
+
+    public function delete(Request $req)
+    {
+        $obj = new Comment;
+
+        $comment = $obj->find($req->id);
+
+        $comment->delete();
+
+        return back();
+    }
 }
